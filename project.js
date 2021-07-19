@@ -158,6 +158,28 @@
                 console.error( error );
             
             } );
+
+
+            var Sun;
+
+            let loaderSun = new THREE.GLTFLoader();
+            var flagSun=false;
+
+            loaderSun.load( 'sun.gltf', function ( gltf ) {
+                Sun=gltf.scene;
+                // Goku.rotation.y-=Math.PI;
+                Sun.position.y+=15;
+                Sun.position.z-=50;
+                Sun.position.x-=5;
+                
+                scene.add( Sun );
+                flagSun=true;
+            
+            }, undefined, function ( error ) {
+            
+                console.error( error );
+            
+            } );
             
             
 
