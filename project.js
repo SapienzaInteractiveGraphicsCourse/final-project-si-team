@@ -98,7 +98,7 @@
             Drake.position.y-=1.5;
 
             const geometryDrakeHead = new THREE.SphereGeometry(0.4, 20,20,20,20,20,20);
-            const textureDrakeHead = new THREE.TextureLoader().load( 'textures/fire.jpg');
+            const textureDrakeHead = new THREE.TextureLoader().load( 'textures/Fire.jpg');
             const materialDrakeHead = new THREE.MeshBasicMaterial( {map: textureDrakeHead} );
             const DrakeHead = new THREE.Mesh( geometryDrakeHead, materialDrakeHead );
             DrakeHead.rotation.y+=4.5;
