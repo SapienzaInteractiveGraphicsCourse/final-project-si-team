@@ -4,7 +4,7 @@
             var i=0;
             var number=0;
             import { OrbitControls } from 'https://cdn.jsdelivr.net/npm/three@0.121.1/examples/jsm/controls/OrbitControls.js';
-            import { GLTFLoader } from '/three.js-master/examples/jsm/loaders/GLTFLoader.js';
+            
 			const renderer = new THREE.WebGLRenderer();
 			renderer.setSize( window.innerWidth, window.innerHeight );
 			document.body.appendChild( renderer.domElement );
@@ -144,7 +144,7 @@
             
             var Goku;
 
-            const loader = new GLTFLoader();
+            let loader = new THREE.GLTFLoader();
             var flagGoku=false;
 
             loader.load( 'scene.gltf', function ( gltf ) {
