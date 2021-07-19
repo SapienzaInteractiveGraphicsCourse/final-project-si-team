@@ -4,7 +4,7 @@
             var i=0;
             var number=0;
             import { OrbitControls } from 'https://cdn.jsdelivr.net/npm/three@0.121.1/examples/jsm/controls/OrbitControls.js';
-            // import { GLTFLoader } from '/three.js-master/examples/jsm/loaders/GLTFLoader.js';
+            import { GLTFLoader } from '/three.js-master/examples/jsm/loaders/GLTFLoader.js';
 			const renderer = new THREE.WebGLRenderer();
 			renderer.setSize( window.innerWidth, window.innerHeight );
 			document.body.appendChild( renderer.domElement );
@@ -144,20 +144,20 @@
             
             var Goku;
 
-            // const loader = new GLTFLoader();
-            // var flagGoku=false;
+            const loader = new GLTFLoader();
+            var flagGoku=false;
 
-            // loader.load( 'scene.gltf', function ( gltf ) {
-            //     Goku=gltf.scene;
-            //     Goku.rotation.y-=Math.PI;
-            //     scene.add( Goku );
-            //     flagGoku=true;
+            loader.load( 'scene.gltf', function ( gltf ) {
+                Goku=gltf.scene;
+                Goku.rotation.y-=Math.PI;
+                scene.add( Goku );
+                flagGoku=true;
             
-            // }, undefined, function ( error ) {
+            }, undefined, function ( error ) {
             
-            //     console.error( error );
+                console.error( error );
             
-            // } );
+            } );
             
             
 
@@ -345,14 +345,7 @@
                 
                 //Horizontal Slider Rotation
                 
-                document.getElementById("YSlider").onclick = function() {
-                    scene.rotation.y+=0.1;
-                };
-
-                document.getElementById("YSlider-").onclick = function() {
-                    scene.rotation.y-=0.1;
-                };
-
+                
 
             
             // for(indexarraysphere=0;indexarraysphere<Objects.length;indexarraysphere++){   
