@@ -10,6 +10,7 @@
 			document.body.appendChild( renderer.domElement );
             scene.background = new THREE.Color(0x99FFFF);
             camera.position.set( 1, 0.5, 5 );
+            var conta=0;
             var flag0=true;
             var flag1=true;
             var flag2=true;
@@ -18,6 +19,10 @@
             var flag5=true;
             var flag6=true;
             var flagAnimation=false;
+            var flagRotationUp=true;
+            
+            var flagRotationDown=false;
+            var flagAnimation1=false;
             var arrayCheck=[false,false,false,false,false,false,false];
             var sumFlag=0;
             var generalFlag=true;
@@ -223,11 +228,15 @@
                 LowerRightArm.position.z+=0.07;
                 LowerRightArm.position.x+=0.05;
                 LowerRightArm.position.x-=0.77;
+
+                LowerRightArm.position.y-=0.57;
+                LowerRightArm.position.x+=0.42;
+                LowerRightArm.position.z-=0.12;
                 
                 LowerRightArm.rotation.y+=Math.PI;
                 LowerRightArm.rotation.z+=Math.PI;
                 ObjectsPlayer.push(LowerRightArm);
-                Goku.add(LowerRightArm);
+                UpperRightArm.add(LowerRightArm);
 
                 //LowerLeftArm
                 const geometryLowerLeftArm = new THREE.BoxGeometry( 0.1, 0.25,0.1 );
@@ -502,7 +511,7 @@
                         Goku.rotation.y+=Math.PI/2;
                         
                         //camera.position.x-=0.1;
-                        console.log(direzione);
+                        
                         break;
                   case 'ArrowRight':
                         direzione-=1;
@@ -511,7 +520,7 @@
                         }
                         Goku.rotation.y-=Math.PI/2;
                         //camera.position.x+=0.1;
-                        console.log(direzione);
+                        
                         break;
                         
                 }
@@ -531,6 +540,8 @@
                  }
                 for(indexarraysphere=0;indexarraysphere<Objects.length;indexarraysphere++){
                     Objects[indexarraysphere].rotation.y+=0.02;
+
+
                 }
                 
                 
@@ -557,10 +568,57 @@
             
             if(generalFlag && flagGoku){
                 
-                if(sumFlag>0 && flagAnimation==false){
-                    
+                
+               
+
+            //     ObjectsPlayer[4].rotation.x-=0.005;
+                
+            //     ObjectsPlayer[4].position.y+=0.0015;
+            //     ObjectsPlayer[4].position.z+=0.0011;
+            // }
+                if(sumFlag>2 && flagAnimation==false){
+                    ObjectsPlayer[7].material.map=new THREE.TextureLoader().load( 'textures/HairTextureBlond.jpg' );
+                    ObjectsPlayer[8].material.map=new THREE.TextureLoader().load( 'textures/HairTextureBlond.jpg' );
+                    ObjectsPlayer[9].material.map=new THREE.TextureLoader().load( 'textures/HairTextureBlond.jpg' );
+
                     
                     flagAnimation=true;
+                    flagAnimation1=false;
+                    
+                    var c=0;
+                    
+                }
+
+                if(sumFlag>4 && flagAnimation1==false){
+                   
+                    if(flagRotationUp){
+                        ObjectsPlayer[7].material.map=new THREE.TextureLoader().load( 'textures/HairTextureRed.jpg' );
+                        ObjectsPlayer[8].material.map=new THREE.TextureLoader().load( 'textures/HairTextureRed.jpg' );
+                        ObjectsPlayer[9].material.map=new THREE.TextureLoader().load( 'textures/HairTextureRed.jpg' );
+                        if(ObjectsPlayer[3].rotation.x>=-2){
+                            ObjectsPlayer[3].rotation.x-=0.005*2;
+                            ObjectsPlayer[3].position.y+=0.0005*2;
+                            ObjectsPlayer[3].position.z+=0.0005*2;
+                            conta=conta+1;
+                        }
+                        else{
+                            flagRotationUp=false;
+                            flagRotationDown=true;
+                        }
+                    }
+                    if(flagRotationDown){
+                        
+                        if(conta>0){
+                            
+                            ObjectsPlayer[3].rotation.x+=0.005*2;
+                            ObjectsPlayer[3].position.y-=0.0005*2;
+                            ObjectsPlayer[3].position.z-=0.0005*2;
+                            flagRotationUp=false;
+                            conta=conta-1;
+                        }
+                    }
+                    
+                   
                     var c=0;
                     
                 }
