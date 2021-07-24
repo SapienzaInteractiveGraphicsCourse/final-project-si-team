@@ -24,6 +24,38 @@
             scene.add( light );
 
 
+            //sky
+
+            var sky = new THREE.Sky();
+			sky.scale.setScalar( 5000 );
+
+            //sun
+			const params = {
+                turbidity: 1,
+                mieDirectionalG: 0.65,
+                mieCoefficient: 0.008,
+                azimuth: 180,
+                elevation: 3,
+                exposure: renderer.toneMappingExposure,
+                rayleigh: 4,
+            };
+            
+            var sun = new THREE.Vector3();
+            const skyParams = sky.material.uniforms;
+            skyParams[ 'turbidity' ].value = params.turbidity;
+            skyParams[ 'rayleigh' ].value = params.rayleigh;
+            skyParams[ 'mieCoefficient' ].value = params.mieCoefficient;
+            skyParams[ 'mieDirectionalG' ].value = params.mieDirectionalG;
+            const phi = THREE.MathUtils.degToRad( 90 - params.elevation );
+            const theta = THREE.MathUtils.degToRad( params.azimuth );
+            sun.setFromSphericalCoords( 1, phi, theta );
+            
+            skyParams[ 'sunPosition' ].value.copy( sun );
+            
+            renderer.toneMappingExposure = params.exposure;
+            scene.add( sky );
+
+
 			// const geometry = new THREE.BoxGeometry(1,1,1);
 			// const material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
 			// const cube = new THREE.Mesh( geometry, material );
@@ -150,6 +182,9 @@
             loader.load( 'scene.gltf', function ( gltf ) {
                 Goku=gltf.scene;
                 Goku.rotation.y-=Math.PI;
+                Goku.scale.x=0.5;
+                Goku.scale.y=0.5;
+                Goku.scale.z=0.5;
                 scene.add( Goku );
                 flagGoku=true;
             
@@ -202,6 +237,35 @@
                 console.error( error );
             
             } );
+
+            var flagTrees;
+            let loaderTrees = new THREE.GLTFLoader();
+            
+            var indexTrees=0;
+            
+            var Trees;
+            loaderTrees.load( 'Trees/scene.gltf', function ( gltf ) {
+                Trees=gltf.scene;
+                
+                Trees.scale.x=0.004;
+                Trees.scale.y=0.005;
+                Trees.scale.z=0.004;
+                Trees.position.y-=0.3;
+                
+                // Drake.position.y-=4;
+           
+                
+                scene.add(Trees);
+                
+                flagTrees=true;
+            
+            }, undefined, function ( error ) {
+            
+                console.error( error );
+            
+            } );
+
+          
             
             
 
@@ -213,6 +277,8 @@
             controls.maxDistance = 10;
             controls.maxPolarAngle = Math.PI / 2;
             controls.keys=false;
+
+                
             
 
 
