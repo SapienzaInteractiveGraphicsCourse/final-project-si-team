@@ -185,7 +185,7 @@
             let loaderShenron = new THREE.GLTFLoader();
             var Drake;
 
-            loaderShenron.load( '/Shenron/scene.gltf', function ( gltf ) {
+            loaderShenron.load( 'Shenron/scene.gltf', function ( gltf ) {
                 Drake=gltf.scene;
                 Drake.scale.x=0.0004;
                 Drake.scale.y=0.0004;
