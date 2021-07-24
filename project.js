@@ -354,7 +354,7 @@
                         }
                         Goku.rotation.y+=Math.PI/2;
                         
-                        camera.position.x-=0.1;
+                        //camera.position.x-=0.1;
                         console.log(direzione);
                         break;
                   case 'ArrowRight':
@@ -363,7 +363,7 @@
                             direzione=0;
                         }
                         Goku.rotation.y-=Math.PI/2;
-                        camera.position.x+=0.1;
+                        //camera.position.x+=0.1;
                         console.log(direzione);
                         break;
                         
