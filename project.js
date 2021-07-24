@@ -81,57 +81,57 @@
             
             scene.add(floor);
 
-            const geometryDrake = new THREE.TorusKnotGeometry( 1, 0.4, 52, 15,6,3 )
-            const textureDrake = new THREE.TextureLoader().load( 'textures/dragonGreen.jpg');
-            const materialDrake = new THREE.MeshBasicMaterial( { map: textureDrake} );
-            const Drake = new THREE.Mesh( geometryDrake, materialDrake );
-            Drake.position.set(0,-1,0);
-            scene.add(Drake);
+            // const geometryDrake = new THREE.TorusKnotGeometry( 1, 0.4, 52, 15,6,3 )
+            // const textureDrake = new THREE.TextureLoader().load( 'textures/dragonGreen.jpg');
+            // const materialDrake = new THREE.MeshBasicMaterial( { map: textureDrake} );
+            // const Drake = new THREE.Mesh( geometryDrake, materialDrake );
+            // Drake.position.set(0,-1,0);
+            // scene.add(Drake);
 
            
             
-            var boxDrake = new THREE.Box3().setFromObject( Drake );
+            // var boxDrake = new THREE.Box3().setFromObject( Drake );
            
             
 
 
-            Drake.position.y-=1.5;
+            // Drake.position.y-=1.5;
 
-            const geometryDrakeHead = new THREE.SphereGeometry(0.4, 20,20,20,20,20,20);
-            const textureDrakeHead = new THREE.TextureLoader().load( 'textures/Fire.jpg');
-            const materialDrakeHead = new THREE.MeshBasicMaterial( {map: textureDrakeHead} );
-            const DrakeHead = new THREE.Mesh( geometryDrakeHead, materialDrakeHead );
-            DrakeHead.rotation.y+=4.5;
-            DrakeHead.position.set(0.2,0.6,0.4);
-            Drake.add(DrakeHead);
+            // const geometryDrakeHead = new THREE.SphereGeometry(0.4, 20,20,20,20,20,20);
+            // const textureDrakeHead = new THREE.TextureLoader().load( 'textures/Fire.jpg');
+            // const materialDrakeHead = new THREE.MeshBasicMaterial( {map: textureDrakeHead} );
+            // const DrakeHead = new THREE.Mesh( geometryDrakeHead, materialDrakeHead );
+            // DrakeHead.rotation.y+=4.5;
+            // DrakeHead.position.set(0.2,0.6,0.4);
+            // Drake.add(DrakeHead);
 
 
-            const geometryDrakeEye = new THREE.SphereGeometry( 0.05, 32, 32);
-            const textureDrakeEye = new THREE.TextureLoader().load( 'textures/Eye.jpg');
-            const materialDrakeEye = new THREE.MeshBasicMaterial( {map: textureDrakeEye} );
-            const DrakeEye = new THREE.Mesh( geometryDrakeEye, materialDrakeEye );
-            DrakeEye.position.set(0.1,0.6,0.75);
-            DrakeEye.rotation.y-=1;
-            Drake.add(DrakeEye);
+            // const geometryDrakeEye = new THREE.SphereGeometry( 0.05, 32, 32);
+            // const textureDrakeEye = new THREE.TextureLoader().load( 'textures/Eye.jpg');
+            // const materialDrakeEye = new THREE.MeshBasicMaterial( {map: textureDrakeEye} );
+            // const DrakeEye = new THREE.Mesh( geometryDrakeEye, materialDrakeEye );
+            // DrakeEye.position.set(0.1,0.6,0.75);
+            // DrakeEye.rotation.y-=1;
+            // Drake.add(DrakeEye);
 
-            const geometryDrakeEye1 = new THREE.SphereGeometry( 0.05, 32, 32);
-            const textureDrakeEye1 = new THREE.TextureLoader().load( 'textures/Eye.jpg');
-            const materialDrakeEye1 = new THREE.MeshBasicMaterial( {map: textureDrakeEye1} );
-            const DrakeEye1 = new THREE.Mesh( geometryDrakeEye1, materialDrakeEye1 );
-            DrakeEye1.position.set(0.4,0.6,0.7);
-            DrakeEye1.rotation.y-=1;
-            Drake.add(DrakeEye1);
+            // const geometryDrakeEye1 = new THREE.SphereGeometry( 0.05, 32, 32);
+            // const textureDrakeEye1 = new THREE.TextureLoader().load( 'textures/Eye.jpg');
+            // const materialDrakeEye1 = new THREE.MeshBasicMaterial( {map: textureDrakeEye1} );
+            // const DrakeEye1 = new THREE.Mesh( geometryDrakeEye1, materialDrakeEye1 );
+            // DrakeEye1.position.set(0.4,0.6,0.7);
+            // DrakeEye1.rotation.y-=1;
+            // Drake.add(DrakeEye1);
 
-            const geometryDrakeMouth = new THREE.BoxGeometry( 0.2, 0.1, 0.04);
-            const textureDrakeMouth = new THREE.TextureLoader().load( 'textures/MouthTexture.jpg');
-            const materialDrakeMouth = new THREE.MeshBasicMaterial( {map: textureDrakeMouth} );
-            const DrakeMouth = new THREE.Mesh( geometryDrakeMouth, materialDrakeMouth );
-            DrakeMouth.position.set(0.25,0.4,0.72);
+            // const geometryDrakeMouth = new THREE.BoxGeometry( 0.2, 0.1, 0.04);
+            // const textureDrakeMouth = new THREE.TextureLoader().load( 'textures/MouthTexture.jpg');
+            // const materialDrakeMouth = new THREE.MeshBasicMaterial( {map: textureDrakeMouth} );
+            // const DrakeMouth = new THREE.Mesh( geometryDrakeMouth, materialDrakeMouth );
+            // DrakeMouth.position.set(0.25,0.4,0.72);
             
-            DrakeMouth.rotation.y+=0.2;
+            // DrakeMouth.rotation.y+=0.2;
             
             
-            Drake.add(DrakeMouth);
+            // Drake.add(DrakeMouth);
 
 
             // const geometryPlayer=new THREE.BoxGeometry(0.5,0.5,0.5);
@@ -174,6 +174,28 @@
                 
                 scene.add( Sun );
                 flagSun=true;
+            
+            }, undefined, function ( error ) {
+            
+                console.error( error );
+            
+            } );
+
+            var flagDrake;
+            let loaderShenron = new THREE.GLTFLoader();
+            var Drake;
+
+            loaderShenron.load( '/Shenron/scene.gltf', function ( gltf ) {
+                Drake=gltf.scene;
+                Drake.scale.x=0.0004;
+                Drake.scale.y=0.0004;
+                Drake.scale.z=0.0004;
+                Drake.position.y-=4;
+            
+                
+                
+                scene.add( Drake );
+                flagDrake=true;
             
             }, undefined, function ( error ) {
             
@@ -471,7 +493,7 @@
 
 
                 keydown();
-                
+                if(flagDrake){
                 if(sumFlag==7 && generalFlag==true){
                     controls.target=Drake.position;
                      Drake.position.y+=0.01;
@@ -481,11 +503,12 @@
                  }
                      camera.position.y+=0.005;
                 }
-                if(Drake.position.y>3 && generalFlag==true &&sumFlag==7){
+                if(Drake.position.y>0.025 && generalFlag==true &&sumFlag==7){
                     generalFlag=false;
                     alert("Congratulazioni, hai vinto!!\nEsprimi il tuo desiderio!");
+                    Drake.position.y-=0.01;
                 }
-
+                }
 
                 controls.update();
 				renderer.render( scene, camera );
