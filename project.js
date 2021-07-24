@@ -113,65 +113,7 @@
             
             scene.add(floor);
 
-            // const geometryDrake = new THREE.TorusKnotGeometry( 1, 0.4, 52, 15,6,3 )
-            // const textureDrake = new THREE.TextureLoader().load( 'textures/dragonGreen.jpg');
-            // const materialDrake = new THREE.MeshBasicMaterial( { map: textureDrake} );
-            // const Drake = new THREE.Mesh( geometryDrake, materialDrake );
-            // Drake.position.set(0,-1,0);
-            // scene.add(Drake);
-
-           
-            
-            // var boxDrake = new THREE.Box3().setFromObject( Drake );
-           
-            
-
-
-            // Drake.position.y-=1.5;
-
-            // const geometryDrakeHead = new THREE.SphereGeometry(0.4, 20,20,20,20,20,20);
-            // const textureDrakeHead = new THREE.TextureLoader().load( 'textures/Fire.jpg');
-            // const materialDrakeHead = new THREE.MeshBasicMaterial( {map: textureDrakeHead} );
-            // const DrakeHead = new THREE.Mesh( geometryDrakeHead, materialDrakeHead );
-            // DrakeHead.rotation.y+=4.5;
-            // DrakeHead.position.set(0.2,0.6,0.4);
-            // Drake.add(DrakeHead);
-
-
-            // const geometryDrakeEye = new THREE.SphereGeometry( 0.05, 32, 32);
-            // const textureDrakeEye = new THREE.TextureLoader().load( 'textures/Eye.jpg');
-            // const materialDrakeEye = new THREE.MeshBasicMaterial( {map: textureDrakeEye} );
-            // const DrakeEye = new THREE.Mesh( geometryDrakeEye, materialDrakeEye );
-            // DrakeEye.position.set(0.1,0.6,0.75);
-            // DrakeEye.rotation.y-=1;
-            // Drake.add(DrakeEye);
-
-            // const geometryDrakeEye1 = new THREE.SphereGeometry( 0.05, 32, 32);
-            // const textureDrakeEye1 = new THREE.TextureLoader().load( 'textures/Eye.jpg');
-            // const materialDrakeEye1 = new THREE.MeshBasicMaterial( {map: textureDrakeEye1} );
-            // const DrakeEye1 = new THREE.Mesh( geometryDrakeEye1, materialDrakeEye1 );
-            // DrakeEye1.position.set(0.4,0.6,0.7);
-            // DrakeEye1.rotation.y-=1;
-            // Drake.add(DrakeEye1);
-
-            // const geometryDrakeMouth = new THREE.BoxGeometry( 0.2, 0.1, 0.04);
-            // const textureDrakeMouth = new THREE.TextureLoader().load( 'textures/MouthTexture.jpg');
-            // const materialDrakeMouth = new THREE.MeshBasicMaterial( {map: textureDrakeMouth} );
-            // const DrakeMouth = new THREE.Mesh( geometryDrakeMouth, materialDrakeMouth );
-            // DrakeMouth.position.set(0.25,0.4,0.72);
-            
-            // DrakeMouth.rotation.y+=0.2;
-            
-            
-            // Drake.add(DrakeMouth);
-
-
-            // const geometryPlayer=new THREE.BoxGeometry(0.5,0.5,0.5);
-            // const texturePlayer=new THREE.TextureLoader().load( 'textures/MouthTexture.jpg');
-            // const materialPlayer= new THREE.MeshBasicMaterial({map:texturePlayer});
-            // const Player=new THREE.Mesh(geometryPlayer,materialPlayer);
-            // Player.position.set(1,-0.1,1);
-            // scene.add(Player);
+          
 
             
             var Goku;
@@ -182,39 +124,147 @@
             loader.load( 'scene.gltf', function ( gltf ) {
                 Goku=gltf.scene;
                 Goku.rotation.y-=Math.PI;
-                Goku.scale.x=0.5;
-                Goku.scale.y=0.5;
-                Goku.scale.z=0.5;
+                Goku.scale.x=0.4;
+                Goku.scale.y=0.4;
+                Goku.scale.z=0.4;
                 scene.add( Goku );
                 flagGoku=true;
-            
-            }, undefined, function ( error ) {
-            
-                console.error( error );
-            
-            } );
-
-
-            var Sun;
-
-            let loaderSun = new THREE.GLTFLoader();
-            var flagSun=false;
-
-            loaderSun.load( 'sun.gltf', function ( gltf ) {
-                Sun=gltf.scene;
-                // Goku.rotation.y-=Math.PI;
-                Sun.position.y+=15;
-                Sun.position.z-=50;
-                Sun.position.x-=5;
                 
-                scene.add( Sun );
-                flagSun=true;
-            
+                //Head
+                const geometryHead = new THREE.BoxGeometry( 0.3, 0.3,0.2 );
+                const textureHead = new THREE.TextureLoader().load( 'textures/ArmTexture.jpg' );
+                const materialHead = new THREE.MeshBasicMaterial( { map:textureHead} );
+                const head = new THREE.Mesh( geometryHead, materialHead );
+                head.position.y+=1.5;
+                
+                head.rotation.y+=Math.PI;
+                head.rotation.z+=Math.PI;
+                Goku.add(head);
+
+                //Body
+                const geometryBody = new THREE.BoxGeometry( 0.65, 0.7,0.4 );
+                const textureBody = new THREE.TextureLoader().load( 'textures/BodyTexture.jpg' );
+                const materialBody = new THREE.MeshBasicMaterial( { map:textureBody} );
+                const body = new THREE.Mesh( geometryBody, materialBody );
+                body.position.y+=1;
+                
+                body.rotation.y+=Math.PI;
+                body.rotation.z+=Math.PI;
+                Goku.add(body);
+
+                //UpperLeftArm
+                const geometryUpperLeftArm = new THREE.BoxGeometry( 0.1, 0.4,0.1 );
+                const textureUpperLeftArm = new THREE.TextureLoader().load( 'textures/ArmTexture.jpg' );
+                const materialUpperLeftArm = new THREE.MeshBasicMaterial( { map:textureUpperLeftArm} );
+                const UpperLeftArm = new THREE.Mesh( geometryUpperLeftArm, materialUpperLeftArm );
+                UpperLeftArm.position.y+=1.1;
+                UpperLeftArm.position.x+=0.35;
+                UpperLeftArm.rotation.x-=0.1;
+                UpperLeftArm.rotation.z-=0.1;
+                UpperLeftArm.position.x+=0.03;
+                
+                UpperLeftArm.rotation.y+=Math.PI;
+                UpperLeftArm.rotation.z+=Math.PI;
+                Goku.add(UpperLeftArm);
+                
+                //UpperRightArm
+                const geometryUpperRightArm = new THREE.BoxGeometry( 0.1, 0.4,0.1 );
+                const textureUpperRightArm = new THREE.TextureLoader().load( 'textures/ArmTexture.jpg' );
+                const materialUpperRightArm = new THREE.MeshBasicMaterial( { map:textureUpperRightArm} );
+                const UpperRightArm = new THREE.Mesh( geometryUpperRightArm, materialUpperRightArm );
+                UpperRightArm.position.y+=1.1;
+                UpperRightArm.position.x+=0.35;
+                UpperRightArm.rotation.x-=0.1;
+                UpperRightArm.rotation.z+=0.1;
+                UpperRightArm.position.x+=0.03;
+                UpperRightArm.position.x-=0.77;
+                
+                UpperRightArm.rotation.y+=Math.PI;
+                UpperRightArm.rotation.z+=Math.PI;
+                Goku.add(UpperRightArm);
+
+
+                //LowerRightArm
+                const geometryLowerRightArm = new THREE.BoxGeometry( 0.1, 0.25,0.1 );
+                const textureLowerRightArm = new THREE.TextureLoader().load( 'textures/ArmTexture.jpg' );
+                const materialLowerRightArm = new THREE.MeshBasicMaterial( { map:textureLowerRightArm} );
+                const LowerRightArm = new THREE.Mesh( geometryLowerRightArm, materialLowerRightArm );
+                LowerRightArm.position.y+=0.85;
+                LowerRightArm.position.x+=0.3;
+                LowerRightArm.rotation.x-=0.5;
+                LowerRightArm.rotation.z+=0.1;
+                LowerRightArm.position.z+=0.07;
+                LowerRightArm.position.x+=0.05;
+                LowerRightArm.position.x-=0.77;
+                
+                LowerRightArm.rotation.y+=Math.PI;
+                LowerRightArm.rotation.z+=Math.PI;
+                Goku.add(LowerRightArm);
+
+                //LowerLeftArm
+                const geometryLowerLeftArm = new THREE.BoxGeometry( 0.1, 0.25,0.1 );
+                const textureLowerLeftArm = new THREE.TextureLoader().load( 'textures/ArmTexture.jpg' );
+                const materialLowerLeftArm = new THREE.MeshBasicMaterial( { map:textureLowerLeftArm} );
+                const LowerLeftArm = new THREE.Mesh( geometryLowerLeftArm, materialLowerLeftArm );
+                LowerLeftArm.position.y+=0.85;
+                LowerLeftArm.position.x+=1.12;
+                LowerLeftArm.rotation.x-=0.5;
+                LowerLeftArm.rotation.z-=0.1;
+                LowerLeftArm.position.z+=0.07;
+                LowerLeftArm.position.x+=0.05;
+                LowerLeftArm.position.x-=0.77;
+                
+                LowerLeftArm.rotation.y+=Math.PI;
+                LowerLeftArm.rotation.z+=Math.PI;
+                Goku.add(LowerLeftArm);
+
+                const geometryLeg = new THREE.BoxGeometry(0.65,0.25,0.4 );
+                const textureLeg = new THREE.TextureLoader().load( 'textures/LegTexture.jpg' );
+                const materialLeg = new THREE.MeshBasicMaterial( { map:textureLeg} );
+                const Leg = new THREE.Mesh( geometryLeg, materialLeg );
+                Leg.position.x+=0;
+                Leg.position.y+=0.529;
+                
+                
+                Leg.rotation.y+=Math.PI;
+                Leg.rotation.z+=Math.PI;
+                Goku.add(Leg);
+
+               
+                const geometryHair = new THREE.ConeGeometry( 0.07,0.2, 10, 33,21,0,6.3 );
+                const textureHair = new THREE.TextureLoader().load( 'textures/HairTexture.jpg' );
+                const materialHair = new THREE.MeshBasicMaterial( { map:textureHair} );
+                const Hair = new THREE.Mesh( geometryHair, materialHair );
+                Hair.position.y+=1.75;
+                Hair.position.x+=0.1;
+                Goku.add(Hair);
+
+                const geometryHair1 = new THREE.ConeGeometry( 0.07,0.2, 10, 33,21,0,6.3 );
+                const materialHair1 = new THREE.MeshBasicMaterial( { map:textureHair} );
+                const Hair1 = new THREE.Mesh( geometryHair1, materialHair1 );
+                Hair1.position.y+=1.75;
+                Hair1.position.x-=0.1;
+                Goku.add(Hair1);
+
+                const geometryHair2 = new THREE.ConeGeometry( 0.14,0.35, 10, 33,21,0,6.3 );
+                const materialHair2 = new THREE.MeshBasicMaterial( { map:textureHair} );
+                const Hair2 = new THREE.Mesh( geometryHair2, materialHair2 );
+                Hair2.position.y+=1.82;
+                ;
+                Goku.add(Hair2);
+          
+                
+
             }, undefined, function ( error ) {
             
                 console.error( error );
             
             } );
+            const directionalLight = new THREE.DirectionalLight( 0xffffff, 0.5 );
+            scene.add( directionalLight );
+            
+            
+            
 
             var flagDrake;
             let loaderShenron = new THREE.GLTFLoader();
@@ -251,6 +301,8 @@
                 Trees.scale.y=0.005;
                 Trees.scale.z=0.004;
                 Trees.position.y-=0.3;
+
+                Trees.position.z-=10;
                 
                 // Drake.position.y-=4;
            
@@ -282,53 +334,6 @@
             
 
 
-            
-            
-
-
-            // var indexDrake=0;
-            // var xIndex=0.1;
-            // var yIndex=0.1;
-            // var vec=(0.1,0.1,0.1);
-            // for(indexDrake=0.1;indexDrake<0.8;indexDrake=indexDrake+0.1){
-            //     const geometryDrake = new THREE.CylinderGeometry( 0.1,0.1,0.1);
-            //     var stringPath=''
-            //     if(indexDrake==0.1){
-            //         stringPath='textures/DragonHead.jpg';
-                    
-            //     }
-            //     else{
-            //         stringPath='textures/dragon.jpg';
-            //     }
-            //     const textureDrake = new THREE.TextureLoader().load( stringPath);
-            //     const materialDrake = new THREE.MeshBasicMaterial( { map: textureDrake} );
-            //     const Drake = new THREE.Mesh( geometryDrake, materialDrake );
-            //     Drake.position.x+=indexDrake;
-            //     Drake.position.y+=Math.exp(yIndex)/9;
-            //     scene.add(Drake);
-            //     yIndex+=0.1;
-            //     Drake.rotation.z+=1.58+Math.exp(yIndex)/10;
-            // }
-
-            // const geometryDrakeHead= new THREE.CylinderGeometry( 0.2,0.1,0.1);
-            // stringPath='textures/DragonHead.jpg';
-            // const textureDrakeHead = new THREE.TextureLoader().load( stringPath);
-            // const materialDrakeHead = new THREE.MeshBasicMaterial( { map: textureDrakeHead} );
-            // const DrakeHead = new THREE.Mesh( geometryDrakeHead, materialDrakeHead );
-            // DrakeHead.position.x+=0.1;
-            // DrakeHead.position.y+=Math.exp(0.1)/9;
-            // scene.add(DrakeHead);
-            // DrakeHead.rotation.z+=1.57+Math.exp(0.1)/10;
-
-            // const geometryDrakeHead1= new THREE.CylinderGeometry( 0.1,0.2,0.2);
-            // stringPath='textures/DragonHead.jpg';
-            // const textureDrakeHead1 = new THREE.TextureLoader().load( stringPath);
-            // const materialDrakeHead1 = new THREE.MeshBasicMaterial( { map: textureDrakeHead1} );
-            // const DrakeHead1 = new THREE.Mesh( geometryDrakeHead1, materialDrakeHead1 );
-            // DrakeHead1.position.x-=0.048;
-            
-            // DrakeHead.add(DrakeHead1);
-
 
 
                
@@ -342,6 +347,8 @@
             document.body.addEventListener('keydown', keyPressed);
             var indiceappoggio=0;
             var direzione=0;
+            var firstBB;
+            var secondBB;
            
             function keyPressed(e){
                 
@@ -349,6 +356,17 @@
                     
                 switch(e.key) {
                   case 'ArrowUp':
+
+                    firstBB = new THREE.Box3().setFromObject(Goku);
+
+                    secondBB = new THREE.Box3().setFromObject(Trees);
+                    
+                    var collision = firstBB.intersectsBox(secondBB);
+
+                    
+                    
+                    if(!collision){
+
                         if(direzione==0){
                             Goku.position.z-=0.1;
                             camera.position.z-=0.1;
@@ -378,9 +396,16 @@
                             Goku.position.x+=0.1;
                             camera.position.x+=0.1;
                         }
+                    }
                         break;
                   case 'ArrowDown':
-                        
+                    firstBB = new THREE.Box3().setFromObject(Goku);
+
+                    secondBB = new THREE.Box3().setFromObject(Trees);
+                    
+                    var collision = firstBB.intersectsBox(secondBB); 
+                    
+                    if(!collision){
                         if(direzione==0){
                             Goku.position.z+=0.1;
                             camera.position.z+=0.1;
@@ -410,6 +435,7 @@
                             Goku.position.x-=0.1;
                             camera.position.x-=0.1;
                         }
+                    }
                        
                         break;
                   case 'ArrowLeft':
