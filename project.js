@@ -17,6 +17,7 @@
             var flag4=true;
             var flag5=true;
             var flag6=true;
+            var flagAnimation=false;
             var arrayCheck=[false,false,false,false,false,false,false];
             var sumFlag=0;
             var generalFlag=true;
@@ -120,7 +121,7 @@
 
             let loader = new THREE.GLTFLoader();
             var flagGoku=false;
-
+            var ObjectsPlayer = new Array();
             loader.load( 'scene.gltf', function ( gltf ) {
                 Goku=gltf.scene;
                 Goku.rotation.y-=Math.PI;
@@ -132,13 +133,14 @@
                 
                 //Head
                 const geometryHead = new THREE.BoxGeometry( 0.3, 0.3,0.2 );
-                const textureHead = new THREE.TextureLoader().load( 'textures/ArmTexture.jpg' );
+                const textureHead = new THREE.TextureLoader().load( 'textures/HeadTexture.jpg' );
                 const materialHead = new THREE.MeshBasicMaterial( { map:textureHead} );
                 const head = new THREE.Mesh( geometryHead, materialHead );
                 head.position.y+=1.5;
                 
                 head.rotation.y+=Math.PI;
                 head.rotation.z+=Math.PI;
+                ObjectsPlayer.push(head);
                 Goku.add(head);
 
                 //Body
@@ -150,11 +152,34 @@
                 
                 body.rotation.y+=Math.PI;
                 body.rotation.z+=Math.PI;
+                ObjectsPlayer.push(body);
                 Goku.add(body);
+
+                //BodyLogo
+                const geometryBodyLogo = new THREE.PlaneGeometry( 0.3, 0.3 );
+                const textureBodyLogo = new THREE.TextureLoader().load( 'textures/BodyLogoTexture.jpg' );
+
+                const materialBodyLogo = new THREE.MeshBasicMaterial( { map:textureBodyLogo} );
+                const BodyLogo = new THREE.Mesh( geometryBodyLogo, materialBodyLogo );
+                BodyLogo.position.y+=1.1;
+                BodyLogo.position.z+=0.21;
+            
+                Goku.add( BodyLogo );
+
+                //FaceTexture
+                const geometryFaceTexture = new THREE.PlaneGeometry( 0.3, 0.3 );
+                const textureFaceTexture = new THREE.TextureLoader().load( 'textures/FaceTexture.jpg' );
+
+                const materialFaceTexture = new THREE.MeshBasicMaterial( { map:textureFaceTexture} );
+                const FaceTexture = new THREE.Mesh( geometryFaceTexture, materialFaceTexture );
+                FaceTexture.position.y+=1.5;
+                FaceTexture.position.z+=0.11;
+            
+                Goku.add( FaceTexture );
 
                 //UpperLeftArm
                 const geometryUpperLeftArm = new THREE.BoxGeometry( 0.1, 0.4,0.1 );
-                const textureUpperLeftArm = new THREE.TextureLoader().load( 'textures/ArmTexture.jpg' );
+                const textureUpperLeftArm = new THREE.TextureLoader().load( 'textures/HeadTexture.jpg' );
                 const materialUpperLeftArm = new THREE.MeshBasicMaterial( { map:textureUpperLeftArm} );
                 const UpperLeftArm = new THREE.Mesh( geometryUpperLeftArm, materialUpperLeftArm );
                 UpperLeftArm.position.y+=1.1;
@@ -165,11 +190,12 @@
                 
                 UpperLeftArm.rotation.y+=Math.PI;
                 UpperLeftArm.rotation.z+=Math.PI;
+                ObjectsPlayer.push(UpperLeftArm);
                 Goku.add(UpperLeftArm);
                 
                 //UpperRightArm
                 const geometryUpperRightArm = new THREE.BoxGeometry( 0.1, 0.4,0.1 );
-                const textureUpperRightArm = new THREE.TextureLoader().load( 'textures/ArmTexture.jpg' );
+                const textureUpperRightArm = new THREE.TextureLoader().load( 'textures/HeadTexture.jpg' );
                 const materialUpperRightArm = new THREE.MeshBasicMaterial( { map:textureUpperRightArm} );
                 const UpperRightArm = new THREE.Mesh( geometryUpperRightArm, materialUpperRightArm );
                 UpperRightArm.position.y+=1.1;
@@ -181,12 +207,13 @@
                 
                 UpperRightArm.rotation.y+=Math.PI;
                 UpperRightArm.rotation.z+=Math.PI;
+                ObjectsPlayer.push(UpperRightArm);
                 Goku.add(UpperRightArm);
 
 
                 //LowerRightArm
                 const geometryLowerRightArm = new THREE.BoxGeometry( 0.1, 0.25,0.1 );
-                const textureLowerRightArm = new THREE.TextureLoader().load( 'textures/ArmTexture.jpg' );
+                const textureLowerRightArm = new THREE.TextureLoader().load( 'textures/HeadTexture.jpg' );
                 const materialLowerRightArm = new THREE.MeshBasicMaterial( { map:textureLowerRightArm} );
                 const LowerRightArm = new THREE.Mesh( geometryLowerRightArm, materialLowerRightArm );
                 LowerRightArm.position.y+=0.85;
@@ -199,11 +226,12 @@
                 
                 LowerRightArm.rotation.y+=Math.PI;
                 LowerRightArm.rotation.z+=Math.PI;
+                ObjectsPlayer.push(LowerRightArm);
                 Goku.add(LowerRightArm);
 
                 //LowerLeftArm
                 const geometryLowerLeftArm = new THREE.BoxGeometry( 0.1, 0.25,0.1 );
-                const textureLowerLeftArm = new THREE.TextureLoader().load( 'textures/ArmTexture.jpg' );
+                const textureLowerLeftArm = new THREE.TextureLoader().load( 'textures/HeadTexture.jpg' );
                 const materialLowerLeftArm = new THREE.MeshBasicMaterial( { map:textureLowerLeftArm} );
                 const LowerLeftArm = new THREE.Mesh( geometryLowerLeftArm, materialLowerLeftArm );
                 LowerLeftArm.position.y+=0.85;
@@ -216,8 +244,10 @@
                 
                 LowerLeftArm.rotation.y+=Math.PI;
                 LowerLeftArm.rotation.z+=Math.PI;
+                ObjectsPlayer.push(LowerLeftArm);
                 Goku.add(LowerLeftArm);
 
+                //leg
                 const geometryLeg = new THREE.BoxGeometry(0.65,0.25,0.4 );
                 const textureLeg = new THREE.TextureLoader().load( 'textures/LegTexture.jpg' );
                 const materialLeg = new THREE.MeshBasicMaterial( { map:textureLeg} );
@@ -228,6 +258,7 @@
                 
                 Leg.rotation.y+=Math.PI;
                 Leg.rotation.z+=Math.PI;
+                ObjectsPlayer.push(Leg);
                 Goku.add(Leg);
 
                
@@ -237,6 +268,7 @@
                 const Hair = new THREE.Mesh( geometryHair, materialHair );
                 Hair.position.y+=1.75;
                 Hair.position.x+=0.1;
+                ObjectsPlayer.push(Hair);
                 Goku.add(Hair);
 
                 const geometryHair1 = new THREE.ConeGeometry( 0.07,0.2, 10, 33,21,0,6.3 );
@@ -244,13 +276,14 @@
                 const Hair1 = new THREE.Mesh( geometryHair1, materialHair1 );
                 Hair1.position.y+=1.75;
                 Hair1.position.x-=0.1;
+                ObjectsPlayer.push(Hair1);
                 Goku.add(Hair1);
 
                 const geometryHair2 = new THREE.ConeGeometry( 0.14,0.35, 10, 33,21,0,6.3 );
                 const materialHair2 = new THREE.MeshBasicMaterial( { map:textureHair} );
                 const Hair2 = new THREE.Mesh( geometryHair2, materialHair2 );
                 Hair2.position.y+=1.82;
-                ;
+                ObjectsPlayer.push(Hair2);
                 Goku.add(Hair2);
           
                 
@@ -287,6 +320,28 @@
                 console.error( error );
             
             } );
+
+            // var flagTemple;
+            // let loaderTemple = new THREE.GLTFLoader();
+            // var Temple;
+
+            // loaderTemple.load( 'Temple/scene.gltf', function ( gltf ) {
+            //     Temple=gltf.scene;
+            //     Temple.scale.x=5;
+            //     Temple.scale.y=5;
+            //     Temple.scale.z=5;
+            //     Temple.position.z-=20;
+            
+                
+                
+            //     scene.add( Temple );
+            //     flagTemple=true;
+            
+            // }, undefined, function ( error ) {
+            
+            //     console.error( error );
+            
+            // } );
 
             var flagTrees;
             let loaderTrees = new THREE.GLTFLoader();
@@ -499,9 +554,16 @@
 
 
             // }
-
+            
             if(generalFlag && flagGoku){
-
+                
+                if(sumFlag>0 && flagAnimation==false){
+                    
+                    
+                    flagAnimation=true;
+                    var c=0;
+                    
+                }
                 
                 if(flag0){
                     var xDif = Goku.position.x - Objects[0].position.x;
