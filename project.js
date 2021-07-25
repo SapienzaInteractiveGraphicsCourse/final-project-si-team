@@ -655,7 +655,7 @@
            
             function keyPressed(e){
                 if(flagGoku){
-                
+                console.log("prova");
                 controls.target=Goku.position;
                     
                 switch(e.key) {
