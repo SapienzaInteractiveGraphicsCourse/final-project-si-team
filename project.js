@@ -730,8 +730,10 @@
                     secondBB = new THREE.Box3().setFromObject(HouseStreetLamp);
                     
                     var collision3 = firstBB.intersectsBox(secondBB);
+                    console.log(collision,collision1,collision2,collision3);
                     
-                    if(!!collision && !collision1 && !collision2 && !collision3){
+                    if(!collision && !collision1 && !collision2 && !collision3){
+                        console.log("ciao");
                         if(direzione==0){
                             Goku.position.z+=0.1;
                             camera.position.z+=0.1;
