@@ -1,5 +1,7 @@
 # final-project-si-team
 # Dragon Ball Game
+Main file is the game.html and related file js called project.js
+Details are shown in the report called Report IG Project Salvatore Iorianni 1808542
 
 The goal of this game is to collect all the 7 dragon spheres.
 
