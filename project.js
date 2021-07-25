@@ -263,7 +263,7 @@
                 Goku.scale.y=0.4;
                 Goku.scale.z=0.4;
                 scene.add( Goku );
-                flagGoku=true;
+                
                 
                 //Head
                 const geometryHead = new THREE.BoxGeometry( 0.3, 0.3,0.2 );
@@ -450,6 +450,7 @@
                 
                 //ObjectsPlayer.push(Ear1);
                 Goku.add(Ear1);
+                flagGoku=true;
 
 
 
@@ -653,8 +654,9 @@
             var secondBB;
            
             function keyPressed(e){
+                if(flagGoku){
                 
-                    controls.target=Goku.position;
+                controls.target=Goku.position;
                     
                 switch(e.key) {
                   case 'ArrowUp':
@@ -730,10 +732,10 @@
                     secondBB = new THREE.Box3().setFromObject(HouseStreetLamp);
                     
                     var collision3 = firstBB.intersectsBox(secondBB);
-                    console.log(collision,collision1,collision2,collision3);
+                    
                     
                     if(!collision && !collision1 && !collision2 && !collision3){
-                        console.log("ciao");
+                        
                         if(direzione==0){
                             Goku.position.z+=0.1;
                             camera.position.z+=0.1;
@@ -789,7 +791,7 @@
                         
                 }
                 e.preventDefault();
-               
+            }
               }
             
             var FlagDrake=false;
