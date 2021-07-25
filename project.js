@@ -20,6 +20,7 @@
             var flag6=true;
             var flagAnimation=false;
             var flagRotationUp=true;
+            var flagHouseAnimation=false;
             
             var flagRotationDown=false;
             var flagAnimation1=false;
@@ -107,19 +108,146 @@
 
            
 
-            
+            //Floor
 
             const geometryFloor = new THREE.BoxGeometry(1500,0.5,1500);
             const textureFloor = new THREE.TextureLoader().load( 'textures/grassTexture.jpeg');
 			const materialFloor = new THREE.MeshBasicMaterial( { map: textureFloor } );
 			const floor = new THREE.Mesh( geometryFloor, materialFloor );
             floor.position.y=-0.6;
-
-            
             
             scene.add(floor);
 
-          
+
+            //House
+            const geometryHouse = new THREE.BoxGeometry(15,10,15);
+            const textureHouse = new THREE.TextureLoader().load( 'textures/TextureHouse.jpg');
+			const materialHouse = new THREE.MeshBasicMaterial( { map: textureHouse } );
+			const House = new THREE.Mesh( geometryHouse, materialHouse );
+            House.position.y=+4.7;
+            House.position.z=-30.6;
+            House.position.x=-30.6;
+
+            scene.add(House);
+
+            var flagHouseRoof;
+            let loaderHouseRoof = new THREE.GLTFLoader();
+            var HouseRoof;
+
+            loaderHouseRoof.load( 'House/scene.gltf', function ( gltf ) {
+                HouseRoof=gltf.scene;
+                HouseRoof.scale.x=0.13;
+                HouseRoof.scale.y=0.14;
+                HouseRoof.scale.z=0.2;
+                console.log(House.position)
+                HouseRoof.position.set(-9.8,4.9,8.5);
+               
+            
+                
+                
+                House.add( HouseRoof );
+                flagHouseRoof=true;
+            
+            }, undefined, function ( error ) {
+            
+                console.error( error );
+            
+            } );
+
+            var flagHouseDoor;
+            let loaderHouseDoor = new THREE.GLTFLoader();
+            var HouseDoor;
+
+            loaderHouseDoor.load( 'Door/scene.gltf', function ( gltf ) {
+                HouseDoor=gltf.scene;
+                HouseDoor.scale.x=1.7;
+                HouseDoor.scale.y=1.7;
+                HouseDoor.scale.z=1;
+                console.log(House.position)
+                HouseDoor.position.set(0,-5,7.4);
+               
+            
+                
+                
+                House.add( HouseDoor );
+                flagHouseDoor=true;
+            
+            }, undefined, function ( error ) {
+            
+                console.error( error );
+            
+            } );
+
+            var flagHouseStreetLamp;
+            let loaderHouseStreetLamp = new THREE.GLTFLoader();
+            var HouseStreetLamp;
+
+            loaderHouseStreetLamp.load( 'StreetLamp/scene.gltf', function ( gltf ) {
+                HouseStreetLamp=gltf.scene;
+                HouseStreetLamp.scale.x=1;
+                HouseStreetLamp.scale.y=1;
+                HouseStreetLamp.scale.z=1;
+                console.log(House.position)
+                HouseStreetLamp.position.set(10,-5,7.4);
+                HouseStreetLamp.rotation.y-=Math.PI/2;
+               
+            
+                
+                
+                House.add( HouseStreetLamp );
+                flagHouseStreetLamp=true;
+            
+            }, undefined, function ( error ) {
+            
+                console.error( error );
+            
+            } );
+            // var spotlightStreetLamp = new THREE.SpotLight(0xff0000,2);
+            // spotlightStreetLamp.position.set(10,5,7.4);
+            // spotlightStreetLamp.lookAt(0,13,0);
+            // scene.add(spotlightStreetLamp);
+
+            const directionalLight2 = new THREE.PointLight( 0xffc966, 9,5 );
+            directionalLight2.position.x=-19;
+            directionalLight2.position.y=+5.5;
+            directionalLight2.position.z=-20;
+            if(flagHouseDoor){
+            directionalLight2.target=HouseDoor;
+             }
+            scene.add( directionalLight2 );
+
+            const directionalLight3 = new THREE.PointLight( 0xffc966, 15,6 );
+            directionalLight3.position.x=-18;
+            directionalLight3.position.y+=1;
+            directionalLight3.position.z=-20;
+        
+            scene.add( directionalLight3 );
+
+            var flagHouseWindow;
+            let loaderHouseWindow = new THREE.GLTFLoader();
+            var HouseWindow;
+
+            loaderHouseWindow.load( 'Window/scene.gltf', function ( gltf ) {
+                HouseWindow=gltf.scene;
+                HouseWindow.scale.x=1.9;
+                HouseWindow.scale.y=1.9;
+                HouseWindow.scale.z=1.9;
+                console.log(House.position)
+                HouseWindow.position.set(0.2,3,7.5);
+                
+               
+            
+                
+                
+                House.add( HouseWindow );
+                flagHouseWindow=true;
+            
+            }, undefined, function ( error ) {
+            
+                console.error( error );
+            
+            } );
+
 
             
             var Goku;
@@ -318,6 +446,7 @@
                 Drake.scale.y=0.0004;
                 Drake.scale.z=0.0004;
                 Drake.position.y-=4;
+                Drake.position.z-=20;
             
                 
                 
@@ -393,6 +522,9 @@
             controls.maxDistance = 10;
             controls.maxPolarAngle = Math.PI / 2;
             controls.keys=false;
+            controls.enableDamping = true;
+            controls.dampingFactor=0.05;
+            
 
                 
             
@@ -543,6 +675,7 @@
 
 
                 }
+                
                 
                 
                 //Horizontal Slider Rotation
@@ -706,19 +839,36 @@
 
                 keydown();
                 if(flagDrake){
-                if(sumFlag==7 && generalFlag==true){
-                    controls.target=Drake.position;
+                if(sumFlag==7 && generalFlag==true ){
+                    House.rotation.y+=0.06;
+                    controls.target.x=-5;
+                    controls.target.z=-5;
+                    
+                    controls.update();
+                    if(House.rotation.y>10){
+                        scene.remove(House);
+                        flagHouseAnimation=true;
+                    }
+                    if(flagHouseAnimation==true){
+                        
+                    controls.target.x=6;
+                    controls.target.y=1;
+                    controls.target.z=-17;
+                    controls.update();
                      Drake.position.y+=0.01;
                      if(camera.position.z<7){
                     camera.position.z+=0.02;
                     
                  }
                      camera.position.y+=0.005;
+                    }
                 }
+                
                 if(Drake.position.y>0.025 && generalFlag==true &&sumFlag==7){
                     generalFlag=false;
-                    alert("Congratulazioni, hai vinto!!\nEsprimi il tuo desiderio!");
+                    alert("Congratulazioni, hai vinto!!\nIo sono il drago dei desideri!Esprimi il tuo!");
                     Drake.position.y-=0.01;
+                    console.log(Drake.position);
                 }
                 }
 
