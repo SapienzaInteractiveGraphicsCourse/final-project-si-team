@@ -18,6 +18,6 @@ Use Chrome for a better experience.
 →	/ ← -> change direction 
 
 # Controls
-Trackpad, press and hold right button to change view, pinch in/out to zoom in/out
+Trackpad, press and hold left button to change view, pinch in/out to zoom in/out
 # Game Link
 You can play at this link: https://sapienzainteractivegraphicscourse.github.io/final-project-si-team/
