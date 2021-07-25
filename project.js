@@ -27,6 +27,7 @@
             var arrayCheck=[false,false,false,false,false,false,false];
             var sumFlag=0;
             var generalFlag=true;
+            var ObjectsPlayer1=new Array();
             const light = new THREE.AmbientLight( 0x404040,4 ); // soft white light
             scene.add( light );
 
@@ -398,7 +399,7 @@
                 ObjectsPlayer.push(Leg);
                 Goku.add(Leg);
 
-               
+                //Hair
                 const geometryHair = new THREE.ConeGeometry( 0.07,0.2, 10, 33,21,0,6.3 );
                 const textureHair = new THREE.TextureLoader().load( 'textures/HairTexture.jpg' );
                 const materialHair = new THREE.MeshBasicMaterial( { map:textureHair} );
@@ -423,7 +424,34 @@
                 ObjectsPlayer.push(Hair2);
                 Goku.add(Hair2);
           
+                const geometryEar = new THREE.PlaneGeometry( 0.2, 0.2 );
+                const textureEar = new THREE.TextureLoader().load( 'textures/EarTexture.jpg' );
+                const materialEar = new THREE.MeshBasicMaterial( { map:textureEar} );
+                const Ear = new THREE.Mesh( geometryEar, materialEar );
+                Ear.position.y+=1.52;
+                Ear.position.x+=0.16;
+                Ear.rotation.y+=Math.PI/2;
+                Ear.scale.x=0.65;
+                Ear.scale.y=0.65;
+                Ear.scale.z=0.65;
+                //ObjectsPlayer.push(Ear);
+                Goku.add(Ear);
+
+                const geometryEar1 = new THREE.PlaneGeometry( 0.2, 0.2 );
+                const textureEar1 = new THREE.TextureLoader().load( 'textures/EarTexture1.jpg' );
+                const materialEar1 = new THREE.MeshBasicMaterial( { map:textureEar1} );
+                const Ear1 = new THREE.Mesh( geometryEar1, materialEar1 );
+                Ear1.position.y+=1.52;
+                Ear1.position.x-=0.16;
+                Ear1.rotation.y-=Math.PI/2;
+                Ear1.scale.x=0.65;
+                Ear1.scale.y=0.65;
+                Ear1.scale.z=0.65;
                 
+                //ObjectsPlayer.push(Ear1);
+                Goku.add(Ear1);
+
+
 
             }, undefined, function ( error ) {
             
@@ -446,6 +474,7 @@
                 Drake.scale.y=0.0004;
                 Drake.scale.z=0.0004;
                 Drake.position.y-=4;
+                Drake.position.x+=4;
                 Drake.position.z-=20;
             
                 
@@ -504,6 +533,82 @@
                 
                 flagTrees=true;
             
+            }, undefined, function ( error ) {
+            
+                console.error( error );
+            
+            } );
+
+            var flagBoard;
+            let loaderBoard = new THREE.GLTFLoader();
+            
+            
+            
+            var Board;
+            loaderBoard.load( 'Board/scene.gltf', function ( gltf ) {
+                Board=gltf.scene;
+                
+                Board.scale.x=2;
+                Board.scale.y=1;
+                Board.scale.z=1;
+                Board.position.y-=0.7;
+                Board.rotation.y+=Math.PI;
+
+                Board.position.z-=20;
+                ObjectsPlayer1.push(Board);
+                
+                // Drake.position.y-=4;
+           
+                
+                scene.add(Board);
+                
+                flagBoard=true;
+
+
+                const geometryBoardPaper = new THREE.BoxGeometry(3.2, 1.8,0.3);
+                const textureBoardPaper = new THREE.TextureLoader().load( 'textures/BoardPaperTexture.jpg' );
+                const materialBoardPaper = new THREE.MeshBasicMaterial( { map:textureBoardPaper} );
+                const BoardPaper = new THREE.Mesh( geometryBoardPaper, materialBoardPaper );
+                BoardPaper.position.y+=2.15;
+                BoardPaper.position.x-=0.0;
+                BoardPaper.position.z-=5.2;
+                BoardPaper.rotation.y-=Math.PI;
+                BoardPaper.scale.x=0.65;
+                BoardPaper.scale.y=0.65;
+                BoardPaper.scale.z=0.65;
+                ObjectsPlayer1.push(BoardPaper);
+                Board.add(BoardPaper);
+
+                const loaderGeometry = new THREE.FontLoader();
+
+                loaderGeometry.load( 'fonts/helvetiker_regular.typeface.json', function ( font ) {
+                
+                    const geometryPaperText = new THREE.TextGeometry( 'Total Spheres \n Collected: 0', {
+                        font: font,
+                        size: 5,
+                        height: 1,
+                        curveSegments: 12,
+                        bevelEnabled: false,
+                        bevelThickness: 1,
+                        bevelSize: 0.5,
+                        bevelOffset: 0,
+                        bevelSegments: 3
+                        
+                } );
+                const texturePaperText = new THREE.TextureLoader().load( 'textures/BoardPaperTexture.jpg' );
+                const materialPaperText = new THREE.MeshBasicMaterial( { color: 0xf00fff} );
+                const PaperText = new THREE.Mesh( geometryPaperText, materialPaperText );
+                ObjectsPlayer1.push(PaperText);
+                PaperText.scale.x=0.05;
+                PaperText.scale.y=0.05;
+                PaperText.scale.z=0.05;
+                PaperText.position.y+=1.5;
+                PaperText.position.z-=14.7;
+                PaperText.position.x-=1;
+                scene.add(PaperText);
+                console.log(PaperText);
+                } );
+                
             }, undefined, function ( error ) {
             
                 console.error( error );
@@ -702,7 +807,8 @@
             if(generalFlag && flagGoku){
                 
                 
-               
+                const loaderGeometryFont = new THREE.FontLoader();
+                
 
             //     ObjectsPlayer[4].rotation.x-=0.005;
                 
@@ -764,6 +870,28 @@
                         
                         sumFlag+=1;
                         flag0=false;
+                        var stringa=String(sumFlag);
+                loaderGeometryFont.load( 'fonts/helvetiker_regular.typeface.json', function ( font ) {
+                
+                    ObjectsPlayer1[2].geometry = new THREE.TextGeometry( stringa, {
+                        font: font,
+                        size: 5,
+                        height: 1,
+                        curveSegments: 12,
+                        bevelEnabled: false,
+                        bevelThickness: 1,
+                        bevelSize: 0.5,
+                        bevelOffset: 0,
+                        bevelSegments: 3
+                        
+                } );
+                console.log(ObjectsPlayer1[2]);
+                scene.add(ObjectsPlayer1[2]);
+            }, undefined, function ( error ) {
+            
+                console.error( error );
+            
+            } );
                     }
                 }
 
@@ -775,6 +903,28 @@
                         
                         sumFlag+=1;
                         flag1=false;
+                        var stringa=String(sumFlag);
+                loaderGeometryFont.load( 'fonts/helvetiker_regular.typeface.json', function ( font ) {
+                
+                    ObjectsPlayer1[2].geometry = new THREE.TextGeometry( 'Total Spheres \n Collected: '+stringa, {
+                        font: font,
+                        size: 5,
+                        height: 1,
+                        curveSegments: 12,
+                        bevelEnabled: false,
+                        bevelThickness: 1,
+                        bevelSize: 0.5,
+                        bevelOffset: 0,
+                        bevelSegments: 3
+                        
+                } );
+                console.log(ObjectsPlayer1[2]);
+                scene.add(ObjectsPlayer1[2]);
+            }, undefined, function ( error ) {
+            
+                console.error( error );
+            
+            } );
                     }
                 }
 
@@ -786,6 +936,28 @@
                         
                         sumFlag+=1;
                         flag2=false;
+                        var stringa=String(sumFlag);
+                loaderGeometryFont.load( 'fonts/helvetiker_regular.typeface.json', function ( font ) {
+                
+                    ObjectsPlayer1[2].geometry = new THREE.TextGeometry('Total Spheres \n Collected: '+ stringa, {
+                        font: font,
+                        size: 5,
+                        height: 1,
+                        curveSegments: 12,
+                        bevelEnabled: false,
+                        bevelThickness: 1,
+                        bevelSize: 0.5,
+                        bevelOffset: 0,
+                        bevelSegments: 3
+                        
+                } );
+                console.log(ObjectsPlayer1[2]);
+                scene.add(ObjectsPlayer1[2]);
+            }, undefined, function ( error ) {
+            
+                console.error( error );
+            
+            } );
                     }
                 }
 
@@ -797,6 +969,28 @@
                         
                         sumFlag+=1;
                         flag3=false;
+                        var stringa=String(sumFlag);
+                loaderGeometryFont.load( 'fonts/helvetiker_regular.typeface.json', function ( font ) {
+                
+                    ObjectsPlayer1[2].geometry = new THREE.TextGeometry( 'Total Spheres \n Collected: '+stringa, {
+                        font: font,
+                        size: 5,
+                        height: 1,
+                        curveSegments: 12,
+                        bevelEnabled: false,
+                        bevelThickness: 1,
+                        bevelSize: 0.5,
+                        bevelOffset: 0,
+                        bevelSegments: 3
+                        
+                } );
+                console.log(ObjectsPlayer1[2]);
+                scene.add(ObjectsPlayer1[2]);
+            }, undefined, function ( error ) {
+            
+                console.error( error );
+            
+            } );
                     }
                 }
 
@@ -808,6 +1002,28 @@
                     
                     sumFlag+=1;
                     flag4=false;
+                    var stringa=String(sumFlag);
+                loaderGeometryFont.load( 'fonts/helvetiker_regular.typeface.json', function ( font ) {
+                
+                    ObjectsPlayer1[2].geometry = new THREE.TextGeometry('Total Spheres \n Collected: '+ stringa, {
+                        font: font,
+                        size: 5,
+                        height: 1,
+                        curveSegments: 12,
+                        bevelEnabled: false,
+                        bevelThickness: 1,
+                        bevelSize: 0.5,
+                        bevelOffset: 0,
+                        bevelSegments: 3
+                        
+                } );
+                console.log(ObjectsPlayer1[2]);
+                scene.add(ObjectsPlayer1[2]);
+            }, undefined, function ( error ) {
+            
+                console.error( error );
+            
+            } );
                     }
                 }
                 if(flag5){
@@ -818,6 +1034,28 @@
                     
                     sumFlag+=1;
                     flag5=false;
+                    var stringa=String(sumFlag);
+                loaderGeometryFont.load( 'fonts/helvetiker_regular.typeface.json', function ( font ) {
+                
+                    ObjectsPlayer1[2].geometry = new THREE.TextGeometry( 'Total Spheres \n Collected: '+stringa, {
+                        font: font,
+                        size: 5,
+                        height: 1,
+                        curveSegments: 12,
+                        bevelEnabled: false,
+                        bevelThickness: 1,
+                        bevelSize: 0.5,
+                        bevelOffset: 0,
+                        bevelSegments: 3
+                        
+                } );
+                console.log(ObjectsPlayer1[2]);
+                scene.add(ObjectsPlayer1[2]);
+            }, undefined, function ( error ) {
+            
+                console.error( error );
+            
+            } );
                     }
                 }
                 if(flag6){
@@ -828,6 +1066,28 @@
                     
                     sumFlag+=1;
                     flag6=false;
+                    var stringa=String(sumFlag);
+                loaderGeometryFont.load( 'fonts/helvetiker_regular.typeface.json', function ( font ) {
+                
+                    ObjectsPlayer1[2].geometry = new THREE.TextGeometry('Total Spheres \n Collected: '+ stringa, {
+                        font: font,
+                        size: 5,
+                        height: 1,
+                        curveSegments: 12,
+                        bevelEnabled: false,
+                        bevelThickness: 1,
+                        bevelSize: 0.5,
+                        bevelOffset: 0,
+                        bevelSegments: 3
+                        
+                } );
+                console.log(ObjectsPlayer1[2]);
+                scene.add(ObjectsPlayer1[2]);
+            }, undefined, function ( error ) {
+            
+                console.error( error );
+            
+            } );
                     }
                 }
                 
