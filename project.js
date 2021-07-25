@@ -525,6 +525,7 @@
                 Trees.position.y-=0.3;
 
                 Trees.position.z-=10;
+                Trees.position.x+=1;
                 
                 // Drake.position.y-=4;
            
@@ -583,20 +584,20 @@
 
                 loaderGeometry.load( 'fonts/helvetiker_regular.typeface.json', function ( font ) {
                 
-                    const geometryPaperText = new THREE.TextGeometry( 'Total Spheres \n Collected: 0', {
+                    const geometryPaperText = new THREE.TextGeometry( 'TOTAL SPHERES \n COLLECTED: 0', {
                         font: font,
                         size: 5,
                         height: 1,
                         curveSegments: 12,
-                        bevelEnabled: false,
+                        bevelEnabled: true,
                         bevelThickness: 1,
-                        bevelSize: 0.5,
+                        bevelSize: 0.2,
                         bevelOffset: 0,
                         bevelSegments: 3
                         
                 } );
                 const texturePaperText = new THREE.TextureLoader().load( 'textures/BoardPaperTexture.jpg' );
-                const materialPaperText = new THREE.MeshBasicMaterial( { color: 0xf00fff} );
+                const materialPaperText = new THREE.MeshBasicMaterial( { color: 0xffa500} );
                 const PaperText = new THREE.Mesh( geometryPaperText, materialPaperText );
                 ObjectsPlayer1.push(PaperText);
                 PaperText.scale.x=0.05;
@@ -604,7 +605,7 @@
                 PaperText.scale.z=0.05;
                 PaperText.position.y+=1.5;
                 PaperText.position.z-=14.7;
-                PaperText.position.x-=1;
+                PaperText.position.x-=1.25;
                 scene.add(PaperText);
                 console.log(PaperText);
                 } );
@@ -664,9 +665,21 @@
                     
                     var collision = firstBB.intersectsBox(secondBB);
 
+                    secondBB = new THREE.Box3().setFromObject(Board);
+                    
+                    var collision1 = firstBB.intersectsBox(secondBB);
+
+                    secondBB = new THREE.Box3().setFromObject(House);
+                    
+                    var collision2 = firstBB.intersectsBox(secondBB);
+
+                    secondBB = new THREE.Box3().setFromObject(HouseStreetLamp);
+                    
+                    var collision3 = firstBB.intersectsBox(secondBB);
+
                     
                     
-                    if(!collision){
+                    if(!collision && !collision1 && !collision2 && !collision3){
 
                         if(direzione==0){
                             Goku.position.z-=0.1;
@@ -705,8 +718,20 @@
                     secondBB = new THREE.Box3().setFromObject(Trees);
                     
                     var collision = firstBB.intersectsBox(secondBB); 
+
+                    secondBB = new THREE.Box3().setFromObject(Board);
                     
-                    if(!collision){
+                    var collision1 = firstBB.intersectsBox(secondBB);
+
+                    secondBB = new THREE.Box3().setFromObject(House);
+                    
+                    var collision2 = firstBB.intersectsBox(secondBB);
+
+                    secondBB = new THREE.Box3().setFromObject(HouseStreetLamp);
+                    
+                    var collision3 = firstBB.intersectsBox(secondBB);
+                    
+                    if(!!collision && !collision1 && !collision2 && !collision3){
                         if(direzione==0){
                             Goku.position.z+=0.1;
                             camera.position.z+=0.1;
@@ -873,14 +898,14 @@
                         var stringa=String(sumFlag);
                 loaderGeometryFont.load( 'fonts/helvetiker_regular.typeface.json', function ( font ) {
                 
-                    ObjectsPlayer1[2].geometry = new THREE.TextGeometry( stringa, {
+                    ObjectsPlayer1[2].geometry = new THREE.TextGeometry('TOTAL SPHERES \n COLLECTED: '+ stringa, {
                         font: font,
                         size: 5,
                         height: 1,
                         curveSegments: 12,
-                        bevelEnabled: false,
+                        bevelEnabled: true,
                         bevelThickness: 1,
-                        bevelSize: 0.5,
+                        bevelSize: 0.2,
                         bevelOffset: 0,
                         bevelSegments: 3
                         
@@ -906,14 +931,14 @@
                         var stringa=String(sumFlag);
                 loaderGeometryFont.load( 'fonts/helvetiker_regular.typeface.json', function ( font ) {
                 
-                    ObjectsPlayer1[2].geometry = new THREE.TextGeometry( 'Total Spheres \n Collected: '+stringa, {
+                    ObjectsPlayer1[2].geometry = new THREE.TextGeometry( 'TOTAL SPHERES \n COLLECTED: '+stringa, {
                         font: font,
                         size: 5,
                         height: 1,
                         curveSegments: 12,
-                        bevelEnabled: false,
+                        bevelEnabled: true,
                         bevelThickness: 1,
-                        bevelSize: 0.5,
+                        bevelSize: 0.2,
                         bevelOffset: 0,
                         bevelSegments: 3
                         
@@ -939,14 +964,14 @@
                         var stringa=String(sumFlag);
                 loaderGeometryFont.load( 'fonts/helvetiker_regular.typeface.json', function ( font ) {
                 
-                    ObjectsPlayer1[2].geometry = new THREE.TextGeometry('Total Spheres \n Collected: '+ stringa, {
+                    ObjectsPlayer1[2].geometry = new THREE.TextGeometry('TOTAL SPHERES \n COLLECTED: '+ stringa, {
                         font: font,
                         size: 5,
                         height: 1,
                         curveSegments: 12,
-                        bevelEnabled: false,
+                        bevelEnabled: true,
                         bevelThickness: 1,
-                        bevelSize: 0.5,
+                        bevelSize: 0.2,
                         bevelOffset: 0,
                         bevelSegments: 3
                         
@@ -972,14 +997,14 @@
                         var stringa=String(sumFlag);
                 loaderGeometryFont.load( 'fonts/helvetiker_regular.typeface.json', function ( font ) {
                 
-                    ObjectsPlayer1[2].geometry = new THREE.TextGeometry( 'Total Spheres \n Collected: '+stringa, {
+                    ObjectsPlayer1[2].geometry = new THREE.TextGeometry( 'TOTAL SPHERES \n COLLECTED:'+stringa, {
                         font: font,
                         size: 5,
                         height: 1,
                         curveSegments: 12,
-                        bevelEnabled: false,
+                        bevelEnabled: true,
                         bevelThickness: 1,
-                        bevelSize: 0.5,
+                        bevelSize: 0.2,
                         bevelOffset: 0,
                         bevelSegments: 3
                         
@@ -1005,14 +1030,14 @@
                     var stringa=String(sumFlag);
                 loaderGeometryFont.load( 'fonts/helvetiker_regular.typeface.json', function ( font ) {
                 
-                    ObjectsPlayer1[2].geometry = new THREE.TextGeometry('Total Spheres \n Collected: '+ stringa, {
+                    ObjectsPlayer1[2].geometry = new THREE.TextGeometry('TOTAL SPHERES \n COLLECTED: '+ stringa, {
                         font: font,
                         size: 5,
                         height: 1,
                         curveSegments: 12,
-                        bevelEnabled: false,
+                        bevelEnabled: true,
                         bevelThickness: 1,
-                        bevelSize: 0.5,
+                        bevelSize: 0.2,
                         bevelOffset: 0,
                         bevelSegments: 3
                         
@@ -1037,14 +1062,14 @@
                     var stringa=String(sumFlag);
                 loaderGeometryFont.load( 'fonts/helvetiker_regular.typeface.json', function ( font ) {
                 
-                    ObjectsPlayer1[2].geometry = new THREE.TextGeometry( 'Total Spheres \n Collected: '+stringa, {
+                    ObjectsPlayer1[2].geometry = new THREE.TextGeometry( 'TOTAL SPHERES \n COLLECTED: '+stringa, {
                         font: font,
                         size: 5,
                         height: 1,
                         curveSegments: 12,
-                        bevelEnabled: false,
+                        bevelEnabled: true,
                         bevelThickness: 1,
-                        bevelSize: 0.5,
+                        bevelSize: 0.2,
                         bevelOffset: 0,
                         bevelSegments: 3
                         
@@ -1069,14 +1094,14 @@
                     var stringa=String(sumFlag);
                 loaderGeometryFont.load( 'fonts/helvetiker_regular.typeface.json', function ( font ) {
                 
-                    ObjectsPlayer1[2].geometry = new THREE.TextGeometry('Total Spheres \n Collected: '+ stringa, {
+                    ObjectsPlayer1[2].geometry = new THREE.TextGeometry('TOTAL SPHERES \n COLLECTED: '+ stringa, {
                         font: font,
                         size: 5,
                         height: 1,
                         curveSegments: 12,
-                        bevelEnabled: false,
+                        bevelEnabled: true,
                         bevelThickness: 1,
-                        bevelSize: 0.5,
+                        bevelSize: 0.2,
                         bevelOffset: 0,
                         bevelSegments: 3
                         
@@ -1126,7 +1151,7 @@
                 
                 if(Drake.position.y>0.025 && generalFlag==true &&sumFlag==7){
                     generalFlag=false;
-                    alert("Congratulazioni, hai vinto!!\nIo sono il drago dei desideri!Esprimi il tuo!");
+                    alert("Congratulations, you won! \n I am the dragon of wishes, make your!");
                     Drake.position.y-=0.01;
                     console.log(Drake.position);
                 }
